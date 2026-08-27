@@ -13,6 +13,6 @@ class ListarUsuariosController{
     }
 
     public function caju(){
-        echo 'Caju!';
+       require_once __DIR__."/../views/formulario.view.php";
     }
 }
