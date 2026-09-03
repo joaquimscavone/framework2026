@@ -30,9 +30,6 @@ class Route
 
     protected function prepareParamns($uri)
     {
-        //id_diciplina 
-        //disciplinas/{id_disciplina}/swap/{professor_1}/{professor_2}
-        //exemplo: ((protected|private|public) [a-z]{1,} \$)
         $exp = "(\{[a-z0-9_\}]{1,})";
         if (preg_match_all($exp, $uri, $matches)) {
             return preg_replace('(\{|\})', '', $matches[0]);
@@ -83,6 +80,14 @@ class Route
        return call_user_func_array($callback, $this->paramns);
     }
 
+
+    public function getMethod(){
+        return $this->method;
+    }
+
+    public function getUri(){
+        return $this->uri;
+    }
 
 
 

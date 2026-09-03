@@ -7,8 +7,8 @@ class ListarUsuariosController{
         require_once __DIR__ ."/../views/listar_usuarios.view.php";
     }
 
-    public function detalhes(){
-        $usuario = Usuario::buscarPorId($_GET['id'] ?? 0);
+    public function detalhes($id){
+        $usuario = Usuario::buscarPorId($id);
         require_once __DIR__."/../views/detalhes.view.php";
     }
 
