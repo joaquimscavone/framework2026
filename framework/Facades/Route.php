@@ -89,6 +89,12 @@ class Route
         return $this->uri;
     }
 
+    public function name($new_name){
+        Router::swapName($this->name,$new_name);
+        $this->name = $new_name;
+        return $this;
+    }
+
 
 
 

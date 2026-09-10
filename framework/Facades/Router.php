@@ -1,6 +1,7 @@
 <?php
 
 namespace Fmk\Facades;
+use Exception;
 use Fmk\Enums\Methods;
 use Fmk\Traits\Singleton;
 
@@ -15,6 +16,20 @@ class Router{
         $name = count($this->routes);
         $this->routes[$name] = new Route($name, $uri, $method, $callback);
         return $this->routes[$name];
+    }
+
+    public static function swapName($from, $to){
+        $router = static::getInstance();
+        if(array_key_exists($from,$router->routes)){
+            if(!array_key_exists($to,$router->routes)){
+                $router->routes[$to] = $router->routes[$from];
+                unset($router->routes[$from]);
+                return ;
+            }
+            throw new Exception("Rota $to já existe nessa aplicação");
+        }
+        throw new Exception("Rota $from não encontrada");
+
     }
 
     public static function get($uri, $callback){
@@ -32,7 +47,8 @@ class Router{
             if($route->getMethod() !=$method){
                 continue;
             }
-            $expression = preg_replace('(\{[a-z0-9_]{1,}\})',"([a-zA-Z0-9_\-|\s]{1,})",$route->getUri());
+            $expression = preg_replace('(\{[a-z0
+            -9_]{1,}\})',"([a-zA-Z0-9_\-|\s]{1,})",$route->getUri());
             if(preg_match("#^($expression)$#i",$uri,$matches)){
             array_shift($matches);
             array_shift($matches);
