@@ -1,28 +1,15 @@
 <?php
 
 namespace Fmk\Facades;
-
 use Fmk\Enums\Methods;
+use Fmk\Traits\Singleton;
 
 class Router{
-    protected static $instance; //o router;
+    use Singleton;
 
     protected array $routes = [];
-
     protected static $error404; //página não encontrada;
     protected static $error403; //página não autorizada;
-
-
-    protected function __construct(){
-
-    }
-
-    public static function getInstance(){
-        if(is_null(static::$instance)){
-            static::$instance = new static;
-        }
-        return static::$instance;
-    }
 
     private function add($uri, Methods $method, $callback){
         $name = count($this->routes);
