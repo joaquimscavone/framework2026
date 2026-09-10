@@ -2,17 +2,25 @@
 
 namespace Fmk\Traits;
 
+use Exception;
 
-trait Singleton{
+
+trait Singleton
+{
     protected static $instance;
 
 
-    protected function __construct(){}
-    protected function __clone(){}
-    
+    protected function __construct()
+    {
+    }
+    protected function __clone()
+    {
+    }
 
-    public static function getInstance(){
-        if(is_null(static::$instance)){
+
+    public static function getInstance()
+    {
+        if (is_null(static::$instance)) {
             static::$instance = new static;
         }
         return static::$instance;

@@ -50,6 +50,11 @@ class Router{
         return rtrim($uri,"/");
     }
 
+
+    public static function error404(){
+        die('error 404 - not found');
+    }
+
     
 
 
